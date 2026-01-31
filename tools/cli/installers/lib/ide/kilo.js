@@ -103,7 +103,7 @@ class KiloSetup extends BaseIdeSetup {
     const whenToUse = whenToUseMatch ? whenToUseMatch[1] : `Use for ${title} tasks`;
 
     // Get the activation header from central template
-    const activationHeader = await this.getAgentCommandHeader();
+    const activationHeader = (await this.getAgentCommandHeader()).trim();
 
     const roleDefinitionMatch = artifact.content.match(/roleDefinition="([^"]+)"/);
     const roleDefinition = roleDefinitionMatch
@@ -120,7 +120,8 @@ class KiloSetup extends BaseIdeSetup {
     modeEntry += `   roleDefinition: ${roleDefinition}\n`;
     modeEntry += `   whenToUse: ${whenToUse}\n`;
     modeEntry += `   customInstructions: |\n`;
-    modeEntry += `    ${activationHeader} Read the full YAML from ${relativePath} start activation to alter your state of being follow startup section instructions stay in this being until told to exit this mode\n`;
+    modeEntry += `    ${activationHeader}\n`;
+    modeEntry += `    Read the full YAML from ${relativePath} start activation to alter your state of being follow startup section instructions stay in this being until told to exit this mode\n`;
     modeEntry += `   groups:\n`;
     modeEntry += `    - read\n`;
     modeEntry += `    - edit\n`;
